@@ -247,4 +247,30 @@ Ensuring the security of the API is critical for maintaining user trust, protect
 
 By combining these measures, the platform ensures a robust and secure environment for all users, from registration to booking and beyond.
 
+## ⚙️ CI/CD Pipeline
+
+### What are CI/CD Pipelines?
+
+**CI/CD** stands for **Continuous Integration** and **Continuous Deployment/Delivery**. These pipelines automate the process of testing, building, and deploying code, ensuring that changes are integrated and shipped quickly and reliably.
+
+- **Continuous Integration (CI)**: Automatically runs tests and builds the project whenever new code is pushed. This ensures new changes don’t break existing functionality.
+- **Continuous Deployment (CD)**: Automatically deploys the tested code to staging or production environments.
+
+### Why They Matter
+
+CI/CD pipelines are crucial for:
+- 🚀 **Faster Delivery**: Automate repetitive tasks like testing and deployment.
+- 🔍 **Early Bug Detection**: Catch issues before they reach production.
+- 🔁 **Consistency**: Reduce manual errors by using repeatable processes.
+- 💬 **Team Collaboration**: Developers get instant feedback on code changes.
+
+### Tools We Could Use
+
+- **GitHub Actions**: Automate workflows directly from GitHub.
+- **Docker**: Containerize the app for consistent environments.
+- **Docker Compose**: Manage multi-container deployments easily.
+- **Heroku / Vercel / Render**: For deployment (depending on stack).
+- **pytest** + **coverage**: For running automated tests and tracking test coverage.
+
+By implementing a strong CI/CD pipeline, we ensure the project is stable, maintainable, and always ready to ship.
 
