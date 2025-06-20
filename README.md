@@ -174,3 +174,77 @@ User 1 ────< Booking >──── 1 Property
   │                        │
   └────< Review >──────────┘
 
+
+## 🧩 Database Schema Overview
+
+This project models a full-stack booking platform, focusing on both users and property management. The database schema is designed to track interactions between hosts and guests, including property listings, bookings, reviews, and payments. Each table is relationally connected to ensure efficient data management and scalability for future features.
+
+---
+
+## 🔍 Feature Breakdown
+
+### 1. 🧑‍💼 User Management
+- **Description:** The User Management system handles the registration, authentication, and management of user profiles. Users can register via email, log in, update their profile information, and manage their preferences. This ensures a personalized experience and allows users to track bookings, make reviews, and manage account details.
+- **Endpoints:** `/users/`, `/users/{user_id}/`
+
+### 2. 🏠 Property Management
+- **Description:** The Property Management system allows property owners (hosts) to list, update, and remove their properties. The system captures essential property details such as name, description, number of rooms, capacity, amenities, price, and availability. This feature is essential for creating a marketplace of properties for guests to browse and book.
+- **Endpoints:** `/properties/`, `/properties/{property_id}/`
+
+### 3. 📅 Booking System
+- **Description:** The Booking system allows guests to reserve properties for a specific period, capturing check-in and check-out details. Bookings are tracked with a status (future, present, past) and allow hosts to manage availability. The system also supports reviewing a booking once completed.
+- **Endpoints:** `/bookings/`, `/bookings/{booking_id}/`
+
+### 4. 💳 Payment Processing
+- **Description:** This feature handles the processing of payments made for bookings. It supports multiple payment methods and records transaction timestamps to ensure transparency and track the status of payments for each booking.
+- **Endpoints:** `/payments/`
+
+### 5. ⭐ Review System
+- **Description:** The Review system enables guests to leave ratings and written feedback for properties they've stayed in. These reviews help future guests make informed decisions and impact the property's average rating. Reviews are also a valuable resource for property owners to improve their services.
+- **Endpoints:** `/reviews/`, `/reviews/{review_id}/`
+
+### 6. 📖 API Documentation
+- **Description:** The project uses OpenAPI standards to document the backend APIs, providing clear and structured documentation for developers. The APIs are built using Django REST Framework for the RESTful endpoints and GraphQL for more flexible querying. This ensures easy integration and allows for detailed error handling and user-friendly API usage.
+- **Standards:** OpenAPI, Django REST Framework, GraphQL
+
+### 7. 🚀 Performance Optimizations
+- **Description:** To ensure high performance, the database uses indexing on frequently accessed fields (such as `user_id` and `property_id`) to speed up query responses. Additionally, caching mechanisms are implemented for high-traffic endpoints to reduce database load, improving response times and scalability.
+- **Optimizations:** Indexing, Caching
+
+
+
+## API Security
+
+Ensuring the security of the API is critical for maintaining user trust, protecting sensitive data, and ensuring the integrity of the booking platform. The following key security measures will be implemented:
+
+### 🔐 Authentication
+**Description**: Only authenticated users can access protected endpoints using secure token-based authentication (JWT or OAuth2).
+**Why it matters**: Prevents unauthorized access to user data and functionality, especially in operations involving personal info, bookings, or payments.
+
+### 🛡️ Authorization
+**Description**: Role-based access control (RBAC) ensures that users (e.g., guests, hosts, admins) can only perform actions they are permitted to.
+**Why it matters**: Protects data boundaries (e.g., a user shouldn’t access another user’s booking history or modify another’s property listing).
+
+### 🚦 Rate Limiting & Throttling
+**Description**: Limits the number of API requests per user/IP over time.
+**Why it matters**: Prevents abuse, brute-force login attempts, and denial-of-service (DoS) attacks that could cripple the platform.
+
+### 🧊 Input Validation & Sanitization
+**Description**: All user inputs are validated and sanitized to prevent injection attacks (e.g., SQL, XSS).
+**Why it matters**: Protects backend systems and data integrity from malicious input.
+
+### 🔒 Secure Payment Handling
+**Description**: Payments are processed through a secure, PCI-compliant provider. Sensitive data is never stored in raw form.
+**Why it matters**: Protects financial information and builds user trust.
+
+### 🔁 HTTPS Enforcement
+**Description**: All traffic is encrypted using HTTPS, with redirection from HTTP.
+**Why it matters**: Prevents man-in-the-middle attacks and ensures data is transmitted securely between client and server.
+
+### 🧠 Logging & Monitoring
+**Description**: All security-critical events are logged and monitored in real time.
+**Why it matters**: Enables fast detection and response to suspicious activity or breaches.
+
+By combining these measures, the platform ensures a robust and secure environment for all users, from registration to booking and beyond.
+
+
