@@ -1,7 +1,12 @@
 # airbnb-clone-project
 exciting new journey into a complex project through baby steps in order to remaster the ropes of modern full stack developpment with an accent on the back-end side for the time being
 
+
 Team Roles :
+Backend Developer: Responsible for implementing API endpoints, database schemas, and business logic.
+Database Administrator: Manages database design, indexing, and optimizations.
+DevOps Engineer: Handles deployment, monitoring, and scaling of the backend services.
+QA Engineer: Ensures the backend functionalities are thoroughly tested and meet quality standards.
 
 (i am not sure how this wil be graded, is it through regex or other means ? we will see if this test passes) 
 
