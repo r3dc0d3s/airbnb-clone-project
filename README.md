@@ -81,3 +81,96 @@ This project uses a set of modern technologies to build a scalable and maintaina
   - **Automated Testing**: Ensure that code changes don’t break existing functionality by running automated tests on every push.
   - **Faster Releases**: Deploy code changes faster with automated pipelines.
   - **Quality Control**: Automatically enforce quality standards such as linting, code coverage, and style checks before deploying to production.
+
+
+
+## 🌍 Database Design
+
+### 🧑 `User`
+Represents a guest or a host in the platform.
+
+| Field                | Type      | Description                                       |
+|---------------------|-----------|---------------------------------------------------|
+| `id`                | UUID      | Primary key                                       |
+| `name`              | String    | Full name of the user                             |
+| `check_in`          | DateTime  | Latest check-in date (if applicable)              |
+| `check_out`         | DateTime  | Latest check-out date (if applicable)             |
+| `reputation_score`  | Float     | Average rating received as a host                 |
+| `rating_behavior`   | Float     | Average rating the user gives to properties       |
+
+**Relationships:**
+- 🔁 One-to-Many with `Booking` (as guest)
+- 🔁 One-to-Many with `Review` (as reviewer)
+
+---
+
+### 🏡 `Property`
+Represents a property listed on the platform.
+
+| Field         | Type      | Description                           |
+|--------------|-----------|---------------------------------------|
+| `id`         | UUID      | Primary key                           |
+| `name`       | String    | Name of the property                  |
+| `description`| Text      | Full description                      |
+| `n_rooms`    | Integer   | Number of rooms                       |
+| `capacity`   | Integer   | Max number of guests                  |
+| `amenities`  | JSON/Array| List of amenities                     |
+| `price`      | Decimal   | Price per night                       |
+| `availability`| JSON     | Available date ranges                 |
+| `rating`     | Float     | Average rating based on reviews       |
+
+**Relationships:**
+- 🔁 One-to-Many with `Booking`
+- 🔁 One-to-Many with `Review`
+
+---
+
+### 📅 `Booking`
+Links users to properties over a date range.
+
+| Field            | Type      | Description                                 |
+|------------------|-----------|---------------------------------------------|
+| `id`             | UUID      | Primary key                                 |
+| `user_id`        | UUID      | FK to `User`                                |
+| `property_id`    | UUID      | FK to `Property`                            |
+| `check_in`       | Date      | Start date of booking                       |
+| `check_out`      | Date      | End date of booking                         |
+| `reviewed`       | Boolean   | Whether a review was submitted              |
+| `review_id`      | UUID?     | FK to `Review` if applicable                |
+| `status`         | Enum      | {future, present, past}                     |
+| `payment_option` | Enum      | {card, paypal, crypto, ...}                 |
+| `payment_ts`     | Timestamp | When payment was processed                  |
+
+**Relationships:**
+- 🔁 Many-to-One with `User`
+- 🔁 Many-to-One with `Property`
+- 🔁 Optional One-to-One with `Review`
+
+---
+
+### ✍️ `Review`
+Feedback left by users after a stay.
+
+| Field       | Type      | Description                       |
+|-------------|-----------|-----------------------------------|
+| `id`        | UUID      | Primary key                       |
+| `user_id`   | UUID      | FK to `User` (reviewer)           |
+| `property_id`| UUID     | FK to `Property`                  |
+| `rating`    | Integer   | Rating from 1 to 5                |
+| `content`   | Text      | Written feedback                  |
+| `timestamp` | DateTime  | When the review was submitted     |
+
+**Relationships:**
+- 🔁 Many-to-One with `User`
+- 🔁 Many-to-One with `Property`
+- 🔁 Optional link to `Booking`
+
+---
+
+## 🔗 ERD Relationship Summary
+
+```plaintext
+User 1 ────< Booking >──── 1 Property
+  │                        │
+  └────< Review >──────────┘
+
