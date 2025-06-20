@@ -169,7 +169,7 @@ Feedback left by users after a stay.
 
 ## 🔗 ERD Relationship Summary
 
-```plaintext
+
 User 1 ────< Booking >──── 1 Property
   │                        │
   └────< Review >──────────┘
